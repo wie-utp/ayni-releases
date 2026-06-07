@@ -276,8 +276,10 @@
       text-align: center; color: #fff; position: relative; overflow: hidden;
       box-shadow: var(--shadow-glow);
     }
-    .cta-inner::before { content: ""; position: absolute; width: 340px; height: 340px; border-radius: 50%; background: rgba(255,255,255,0.12); top: -140px; right: -80px; }
-    .cta-inner::after { content: ""; position: absolute; width: 280px; height: 280px; border-radius: 50%; background: rgba(196,98,45,0.25); bottom: -150px; left: -60px; filter: blur(20px); }
+    .cta-inner::before { content: ""; position: absolute; z-index: 0; width: 340px; height: 340px; border-radius: 50%; background: rgba(255,255,255,0.12); top: -140px; right: -80px; }
+    .cta-inner::after { content: ""; position: absolute; z-index: 0; width: 280px; height: 280px; border-radius: 50%; background: rgba(196,98,45,0.25); bottom: -150px; left: -60px; filter: blur(20px); }
+    /* Real content stays above the decorative circles. */
+    .cta-inner > * { position: relative; z-index: 1; }
     .cta-inner h2 { font-size: clamp(1.7rem, 1.3rem + 2vw, 2.6rem); font-weight: 800; position: relative; }
     .cta-inner p { margin-top: 0.75rem; opacity: 0.92; font-size: 1.1rem; position: relative; }
     .cta-inner .btn { margin-top: 2rem; position: relative; background: #fff; color: var(--primary-dark); box-shadow: 0 14px 30px -10px rgba(0,0,0,0.3); }
