@@ -77,12 +77,13 @@
 
     /* ── Animated backdrop (fixed, drifting blobs) ─────────────── */
     .backdrop { position: fixed; inset: 0; z-index: -2; background: linear-gradient(180deg, var(--cream-top), var(--surface) 55%); }
-    /* transform:translateZ(0) promotes each blob to its own layer so the
-       expensive blur rasterises once and drift is pure compositor transform. */
-    .backdrop .blob { position: absolute; border-radius: 50%; filter: blur(64px); transform: translateZ(0); will-change: transform; }
-    .b1 { width: 60vw; max-width: 640px; aspect-ratio: 1; background: var(--primary); opacity: 0.18; top: -16vh; right: -10vw; animation: drift1 26s var(--ease-soft) infinite alternate; }
-    .b2 { width: 52vw; max-width: 560px; aspect-ratio: 1; background: var(--secondary); opacity: 0.15; bottom: -18vh; left: -12vw; animation: drift2 32s var(--ease-soft) infinite alternate; }
-    .b3 { width: 44vw; max-width: 460px; aspect-ratio: 1; background: var(--accent); opacity: 0.13; top: 38%; left: 50%; animation: drift3 28s var(--ease-soft) infinite alternate; }
+    /* translateZ(0) promotes each blob to its own layer so the blur rasterises
+       once (one-time cost, no scroll re-paint). Generous blur + low opacity keep
+       them diffuse ambient washes, never defined circles near content. */
+    .backdrop .blob { position: absolute; border-radius: 50%; filter: blur(100px); transform: translateZ(0); will-change: transform; }
+    .b1 { width: 62vw; max-width: 680px; aspect-ratio: 1; background: var(--primary); opacity: 0.16; top: -24vh; right: -16vw; animation: drift1 26s var(--ease-soft) infinite alternate; }
+    .b2 { width: 56vw; max-width: 620px; aspect-ratio: 1; background: var(--secondary); opacity: 0.09; bottom: -28vh; left: -22vw; animation: drift2 32s var(--ease-soft) infinite alternate; }
+    .b3 { width: 46vw; max-width: 500px; aspect-ratio: 1; background: var(--accent); opacity: 0.11; top: 42%; left: 58%; animation: drift3 28s var(--ease-soft) infinite alternate; }
     /* Subtle grain for depth */
     .grain { position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.035;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
